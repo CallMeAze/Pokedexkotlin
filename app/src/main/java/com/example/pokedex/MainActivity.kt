@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
             if(intent!!.action!!.toString()==Common.KEY_NUM_EVOLUTION)
             {
                 val detailFragment = PokemonDetail.getInstance()
-                val bundle = Bundle()
                 val num=intent.getStringExtra("num")
+                val bundle = Bundle()
                 bundle.putString("num", num)
                 detailFragment.arguments=bundle
                 val fragmentTransaction=supportFragmentManager.beginTransaction()
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 fragmentTransaction.replace(R.id.list_pokemon_fragment, detailFragment)
                 fragmentTransaction.addToBackStack("detail")
                 fragmentTransaction.commit()
-                val pokemon=Common.findPokemonByNum(num)
+                val pokemon = Common.findPokemonByNum(num)
                 toolbar.title=pokemon!!.name
             }
         }
