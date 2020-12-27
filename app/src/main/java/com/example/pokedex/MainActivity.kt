@@ -14,6 +14,26 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val showType=object:BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if(intent!!.action!!.toString()==Common.KEY_POKEMON_TYPE)
+            {
+                val pokemonType = PokemonType.getInstance()
+                val type = intent.getStringExtra("type")
+                val bundle = Bundle()
+                bundle.putString("type", type)
+                pokemonType!!.arguments=bundle
+                supportFragmentManager.popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                val fragmentTransaction=supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.list_pokemon_fragment, pokemonType)
+                fragmentTransaction.addToBackStack("type")
+                fragmentTransaction.commit()
+                toolbar.title="POKEMON TYPE "+type.toUpperCase()
+            }
+        }
+
+    }
+
     private val showDetail=object:BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if(intent!!.action!!.toString()==Common.KEY_ENABLE_HOME)
@@ -65,6 +85,8 @@ class MainActivity : AppCompatActivity() {
             .registerReceiver(showDetail, IntentFilter(Common.KEY_ENABLE_HOME))
         LocalBroadcastManager.getInstance(this)
             .registerReceiver(showEvolution, IntentFilter(Common.KEY_NUM_EVOLUTION))
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(showType, IntentFilter(Common.KEY_POKEMON_TYPE))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -72,6 +94,14 @@ class MainActivity : AppCompatActivity() {
             android.R.id.home -> {
                 toolbar.title="Pokemon List"
                 supportFragmentManager.popBackStack("detail", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                supportFragmentManager.popBackStack("type", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
+                val pokemonList = PokemonList.getInstance()
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.remove(pokemonList!!)
+                fragmentTransaction.replace(R.id.list_pokemon_fragment, pokemonList)
+                fragmentTransaction.commit()
+
                 supportActionBar!!.setDisplayShowHomeEnabled(false)
                 supportActionBar!!.setDisplayHomeAsUpEnabled(false)
             }
