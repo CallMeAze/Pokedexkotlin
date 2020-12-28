@@ -6,9 +6,12 @@ Ce projet Pokedex est un projet de quatrième année d'école d'ingénieur. Cett
 
 # Consignes respectées : 
 
+- Langage **kotlin**
 - Appels à une **API REST** 
 - Architecture **MVVM**
 - Utilisation de **Retrofit 2**
+- Affichage d'une **liste**
+- **Design**
 - **Fonctions supplémentaires** :
   - Utilisation de **Glide**
   - Utlisation de **RxJava**
