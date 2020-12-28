@@ -4,7 +4,8 @@
 
 Ce projet Pokedex est un projet de quatrième année d'école d'ingénieur. Cette application affiche des créatures issues de l'univers pokémon.
 
-# Consignes respectées
+# Consignes respectées : 
+
 - Appels à une **API REST** 
 - Architecture **MVVM**
 - Utilisation de **Retrofit 2**
@@ -12,8 +13,8 @@ Ce projet Pokedex est un projet de quatrième année d'école d'ingénieur. Cett
   - Utilisation de **Glide**
   - Utlisation de **RxJava**
   - Utilisation de **Singleton**
-	- Barre de recherche
-	- **Filtrage** de la liste **en fonction du type** des pokémons à l'aide d'une puce cliquable
+  - Barre de recherche
+  - Filtrage de la liste en fonction du type
 
 
 # Fonctionnalités: 
